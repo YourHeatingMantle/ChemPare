@@ -2,6 +2,7 @@ from S3 import fetch_from_es_drei
 from LaboratoriumDiscounter import fetch_from_lab_dis
 from Onyxmet import fetch_from_onyxmet
 from LabChem import fetch_from_lab_chem
+from translateChem import translate
 from rich.console import Console
 from rich.panel import Panel
 import requests
@@ -14,11 +15,11 @@ def main():
     chem = input("> ")
 
     # List of supplier functions
-    supplier_fetchers = {
-        "es_drei": fetch_from_es_drei,
-        "lab_dis": fetch_from_lab_dis,
-        "onyxmet": fetch_from_onyxmet,
-        "labchem": fetch_from_lab_chem
+    supplier_properties = {
+        "es_drei": [fetch_from_es_drei, "de"],
+        "lab_dis": [fetch_from_lab_dis, "original"],
+        "onyxmet": [fetch_from_onyxmet, "original"],
+        "labchem": [fetch_from_lab_chem, "de"]
     }
 
     combined_name_list = []
@@ -33,8 +34,11 @@ def main():
         task = progress.add_task("[cyan]Searching.. ", total=len(supplier_fetchers))
 
         # Automatically call each fetch function and update progressbar
-        for supplier, fetch_func in supplier_fetchers.items():
-            name_list, price_list, supplier_name_list, location_list, url_list = fetch_func(chem)
+        for supplier, fetch_and_language in supplier_properties.items():
+            if fetch_and_language[1] != "original":
+                name_list, price_list, supplier_name_list, location_list, url_list = fetch_and_language[0](translate(chem, fetch_and_language[1]))
+            else:
+                name_list, price_list, supplier_name_list, location_list, url_list = fetch_and_language[0](chem)
             progress.update(task, advance=1)
             combined_name_list.append(name_list)
             combined_price_list.append(price_list)
