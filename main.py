@@ -31,7 +31,7 @@ def main():
     console = Console()
 
     with Progress(console=console) as progress:
-        task = progress.add_task("[cyan]Searching.. ", total=len(supplier_fetchers))
+        task = progress.add_task("[cyan]Searching.. ", total=len(supplier_properties))
 
         # Automatically call each fetch function and update progressbar
         for supplier, fetch_and_language in supplier_properties.items():
