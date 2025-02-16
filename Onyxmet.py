@@ -82,5 +82,3 @@ def fetch_from_onyxmet(chem):
             price_list.append(product_price)
 
     return name_list, price_list, supplier_name, location, url
-
-fetch_from_onyxmet("sodium")

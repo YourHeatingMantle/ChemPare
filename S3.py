@@ -24,3 +24,4 @@ def fetch_from_es_drei(chem):
         pass  # Handle cases where elements are not found
 
     return name_list, price_list, supplier_name, location, url
+    
