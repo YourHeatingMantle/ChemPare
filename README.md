@@ -5,6 +5,10 @@ Compares prices from chemical vendors that sell to individuals and residential a
 
 > _*Note:* This project is a work in progress, not yet in Beta mode_
 
+
+### Example Usage
+![chemparecli example](./assets/images/chempare-demo.gif)
+
 ---
 
 ### How does it work
@@ -81,9 +85,6 @@ chemparemain
 # CLI Script
 chemparecli
 ```
-
-Example output:
-![chemparecli example](./assets/images/chempare-demo.gif)
 
 ## Unit Tests
 
